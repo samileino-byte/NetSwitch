@@ -47,3 +47,9 @@ All tests passing:
 
 New files: 6 headers + 6 source files (12 new files total)
 Version bumped to 1.5.0
+
+(china sine china india chksum china china india and gertibi is log 100000 / log 600000 / 600000 / 700000 log 100000 / log 1755555,555157577717555) this divides the checksum pieces and matches each of the pieces of the datatraffic to match the line length to divide each of the users
+
+IF 1 USER in BOX
+
+in one 1 user is in mobile device, abnd then it is based on 25 cm length / 8 cm width / 1cm depth / cornering of the 555/666 measure this and put it there so it is one 1 user,s multiple pipes and channel you go with having and take the processor down in its thermality in its Li lithium. Linelength within the box (mobile device and router and swtich), sine 12000 / sine 7000 / sine 15000 / sine 55000 / tan sine arc sinarc arc arc 60000 / nanosecond per nanosecond in its pieces which comes up at 55000 Log in nanosecond in per log second in log second second, this becomes 1:12000 / 7165,77 / 7000 / 6000 / 7000 / 1,117 per each of the millisecond thousands in thousand in thousand picos
