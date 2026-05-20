@@ -86,3 +86,10 @@ Files added:
 - Updated CMakeLists.txt, test_bench.cpp, NETWORK_DOCS.txt
 
 Run with --thermal-only to test just this module.
+
+
+1. I've reviewed our crypto code (rsa_crypto.cpp) against the vulnerability pattern described on copy.fail. Our RSA module doesn't use kernel crypto APIs (algif_aead, AF_ALG sockets) - it's all userspace math. So CVE-2026-31431 doesn't apply to our code. OK
+
+2. I can do a full manual security audit of all the source files right now - checking for buffer overflows, use-after-free, race conditions, input validation, and crypto weaknesses. Want me to run through that? OK
+
+If you want to use Xint Code specifically, you'd need to upload the source files there yourself since it requires web login. I can prepare the files in whatever format they need. OK
