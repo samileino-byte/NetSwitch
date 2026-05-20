@@ -93,3 +93,59 @@ Run with --thermal-only to test just this module.
 2. I can do a full manual security audit of all the source files right now - checking for buffer overflows, use-after-free, race conditions, input validation, and crypto weaknesses. Want me to run through that? OK
 
 If you want to use Xint Code specifically, you'd need to upload the source files there yourself since it requires web login. I can prepare the files in whatever format they need. OK
+
+NetSwitch v1.4.0 is ready. Here's what's new:
+
+NEW MODULES:
+
+1. GSM/CELLULAR ECHO TESTER (gsm_tester.h/cpp)
+- Tests all cellular generations: GSM 2G, UMTS 3G, LTE 4G, NR 5G
+- Echo latency measurement per technology (GSM ~300ms, UMTS ~80ms, LTE ~20ms, 5G ~4ms)
+- Signal metrics: RSSI, RSRP, RSRQ, SINR, SNR, BER, FER
+- echo_log_sin(a/b) function: log10(|sin(SNR/noise_floor)|)
+- SNR logging with timestamped signal measurements (10 samples per test)
+- Band sweep across all frequencies per technology
+- 19 signal bands: n8, n9, n10, n11, n28, n77, n78, n79, GSM-900/1800, UMTS-2100, LTE B1/B3/B7/B20/B28/B38/B40
+- Signal quality classification: EXCELLENT/GOOD/FAIR/POOR/NO_SIGNAL
+- Signal log with full time-series export
+
+2. RSA CRYPTO / JWKS (rsa_crypto.h/cpp)
+- RSA key pair generation (2048/3072/4096 bit)
+- Built-in SHA-256 hash (no external dependency)
+- PKCS#1 v1.5 signature padding
+- RSA sign and verify
+- JWK export (JSON Web Key) from key pair
+- JWKS multi-key export (JSON Web Key Set)
+- JWT creation with RS256 algorithm
+- JWT verification and decode
+- Base64url encode/decode
+- Key rotation with configurable lifetime
+- Key expiry tracking
+- Integrates with SecurityManager (OIDC), CertValidator (X.509), TunnelManager (auth)
+
+3. TUNNEL PROTOCOL FUNCTIONAL TESTS (25 tests)
+- IKEv2: create, state check, keepalive config, auto-reconnect, send/recv validation, destroy
+- SSH: create, state check, credentials storage, keepalive, stop, destroy
+- GRU: create, state check, port validation, destroy
+- Multi-tunnel: 3 concurrent tunnels (IKEv2+SSH+GRU), unique IDs, selective destroy
+- Certificate operations: verify non-empty, reject empty
+
+4. WINDOWS GUI TEST BENCH (test_bench_gui.h/cpp)
+- Win32 native GUI, professional enterprise appearance
+- Single dashboard: ListView with all 15 test categories
+- Columns: #, Category, Status, Tests, Passed, Failed, Duration, Details
+- Form factor selector (Desktop/Phone/Tablet dropdown)
+- Run All / Stop buttons
+- Real-time progress bar
+- Scrollable log output (Consolas monospace font)
+- Status bar with pass/fail summary
+- Segoe UI fonts, grid lines, full-row select
+- Multi-threaded: tests run in background, UI stays responsive
+- Build target: TestBenchGUI (Windows only)
+
+BUG FIX:
+- echo_log_sin was returning 0.0 for negative ratios (SNR/noise_floor). Fixed to use abs(sin(ratio)).
+
+RSA Key chain to OKTA time out vulnerabilities checked.
+
+  
