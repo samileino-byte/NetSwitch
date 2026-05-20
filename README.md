@@ -148,4 +148,27 @@ BUG FIX:
 
 RSA Key chain to OKTA time out vulnerabilities checked.
 
-  
+ IAM role architecture for Kubernetes multi-cluster:
+
+LEFT (red): Per-Cluster Roles (Role Sprawl) - each cluster gets its own OIDC Provider + IAM Role + Trust relationship. N clusters = N roles to manage. Doesn't scale.
+
+RIGHT (green): Shared IAM Role (Multi-Cluster) - all clusters share one OIDC Provider, one IAM Role. STS Shared JWKS handles the trust chain. N clusters, 1 issuer, 1 role.
+
+RSA KEY - yes, absolutely should be in this. The entire trust chain on the right side runs on RSA keys:
+- JWKS (JSON Web Key Set) contains RSA public keys
+- Each cluster signs JWT tokens with RSA private key
+- OIDC Provider verifies signatures using RSA public keys from JWKS
+- IAM role trust policy validates the OIDC token chain
+
+For NetSwitch, I'll add an RSA key module that covers:
+1. RSA key pair generation (2048/4096 bit)
+2. JWKS format export (for OIDC/IAM trust chains like in the slide)
+3. JWT token signing and verification
+4. Key rotation support
+5. Integration with CertValidator (X.509 certs use RSA keys)
+6. Integration with TunnelManager (IKEv2/SSH use RSA for auth)
+
+This ties directly into the security architecture - the SecurityManager already handles Okta SSO and Zscaler ZTNA, both of which use OIDC/JWKS under the hood. Adding RSA key support makes the trust chain complete.
+
+I'll build this alongside the other pending items (Windows GUI test bench, GSM echo, tunnel tests). Working on it now.
+
